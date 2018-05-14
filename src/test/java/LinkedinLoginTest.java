@@ -6,12 +6,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static java.lang.Thread.sleep;
+
 
 public class LinkedinLoginTest {
 
     @Test
-    public void successfulLoinTest() throws InterruptedException {
+    public void successfulLoinTest() {
         WebDriver webDriver = new FirefoxDriver();
         webDriver.get("https://www.linkedin.com");
 
@@ -30,7 +30,7 @@ public class LinkedinLoginTest {
         passwordField.sendKeys(actualPassword);
         signInButton.click();
         Assert.assertFalse(webDriver.getCurrentUrl() == homePageTitle, "User is logged in without email inserted");
-        sleep(3000);
+
 
         // negative case 2: email is right, password is empty
         emailField.sendKeys(actualEmail);
@@ -38,7 +38,7 @@ public class LinkedinLoginTest {
         signInButton.click();
         Assert.assertFalse(webDriver.getCurrentUrl() == homePageTitle, "User is logged in without password inserted");
         webDriver.navigate().back();
-        sleep(3000);
+
 
         // negative case 3: email is right, password is equal to actual, but with caps
         emailField = webDriver.findElement(By.xpath("//form[@class='login-form']/input[@class='login-email']"));
@@ -49,7 +49,7 @@ public class LinkedinLoginTest {
         signInButton.click();
         Assert.assertFalse(webDriver.getCurrentUrl() == homePageTitle, "User is logged in with wrong password (caps is on)");
         webDriver.navigate().back();
-        sleep(3000);
+
 
         // negative case 4: email is wrong, password is right
         emailField = webDriver.findElement(By.xpath("//form[@class='login-form']/input[@class='login-email']"));
@@ -60,7 +60,7 @@ public class LinkedinLoginTest {
         signInButton.click();
         Assert.assertFalse(webDriver.getCurrentUrl() == homePageTitle, "User is logged in with wrong email");
         webDriver.navigate().back();
-        sleep(3000);
+
 
         // negative case 5: email is right, password is wrong
         emailField = webDriver.findElement(By.xpath("//form[@class='login-form']/input[@class='login-email']"));
@@ -71,7 +71,6 @@ public class LinkedinLoginTest {
         signInButton.click();
         Assert.assertFalse(webDriver.getCurrentUrl() == homePageTitle, "User is logged in with wrong password");
         webDriver.navigate().back();
-        sleep(3000);
 
 
         // positive case
