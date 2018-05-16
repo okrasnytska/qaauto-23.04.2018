@@ -31,7 +31,7 @@ public class LinkedinLoginTest {
         Assert.assertEquals(webDriver.getTitle(), "LinkedIn", "Home page title is wrong");
         Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/feed/", "Home page URL is wrong");
         Assert.assertTrue(webDriver.findElement(By.xpath("//a[@href='/feed/']/*[contains(text(), 'Главная')]")).isDisplayed(),
-                "Home button is not present");
+                "Home button isn't present");
     }
 
     @Test
