@@ -20,18 +20,15 @@ public class LinkedinLoginTest {
     @Test
     public void successfulLoinTest() {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
-        String actualLoginPageTitle = webDriver.getTitle();
-        Assert.assertEquals(webDriver.getTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
+        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
         Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
 
         linkedinLoginPage.login("o.a.krasnitskaya@mail.ru", "10091971q");
 
-        String actualHomePageTitle = webDriver.getTitle();
-        Assert.assertNotEquals(actualLoginPageTitle, actualHomePageTitle, "Page Title did not change after sign in");
-        Assert.assertEquals(webDriver.getTitle(), "LinkedIn", "Home page title is wrong");
-        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/feed/", "Home page URL is wrong");
-        Assert.assertTrue(webDriver.findElement(By.xpath("//a[@href='/feed/']/*[contains(text(), 'Главная')]")).isDisplayed(),
-                "Home button isn't present");
+        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
+        
+        Assert.assertEquals(linkedinHomePage.getCurrentUrl(), "https://www.linkedin.com/feed/", "Home page URL is wrong");
+        Assert.assertTrue(linkedinHomePage.getCurrentTitle().contains("LinkedIn"), "Home page title is wrong");
     }
 
     @Test
