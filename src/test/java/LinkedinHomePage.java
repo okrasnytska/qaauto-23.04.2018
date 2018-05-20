@@ -1,12 +1,19 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import java.awt.*;
 
 public class LinkedinHomePage {
     WebDriver webDriver;
+    WebElement newPostLink;
 
     public LinkedinHomePage(WebDriver webDriver) {
         this.webDriver = webDriver;
+        initElements();
+    }
+
+    public void initElements() {
+        newPostLink = webDriver.findElement(By.xpath("//a[@href='https://www.linkedin.com/post/new']"));
     }
 
     public String getCurrentUrl() {
@@ -15,5 +22,9 @@ public class LinkedinHomePage {
 
     public String getCurrentTitle() {
         return webDriver.getTitle();
+    }
+
+    public boolean isNewPostLinkDisplayed() {
+        return newPostLink.isDisplayed();
     }
 }
