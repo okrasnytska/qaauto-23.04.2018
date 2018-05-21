@@ -3,25 +3,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public class LinkedinHomePage {
-    WebDriver webDriver;
-    WebElement newPostLink;
+public class LinkedinHomePage extends LinkedinBasePage {
+
+    private WebElement newPostLink;
 
     public LinkedinHomePage(WebDriver webDriver) {
-        this.webDriver = webDriver;
+        super(webDriver);
         initElements();
     }
 
     public void initElements() {
         newPostLink = webDriver.findElement(By.xpath("//a[@href='https://www.linkedin.com/post/new']"));
-    }
-
-    public String getCurrentUrl() {
-        return webDriver.getCurrentUrl();
-    }
-
-    public String getCurrentTitle() {
-        return webDriver.getTitle();
     }
 
     public boolean isNewPostLinkDisplayed() {
