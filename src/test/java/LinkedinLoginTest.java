@@ -25,52 +25,58 @@ public class LinkedinLoginTest {
     }
 
     @Test(dataProvider = "validDataProvider")
-    public void testSuccessfulLoginTest(String email, String password) {
+    public void successfulLoginTest(String email, String password) {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
+        Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
 
         linkedinLoginPage.login(email, password);
 
         LinkedinHomePage linkedinHomePage = new LinkedinHomePage(webDriver);
 
         Assert.assertEquals(linkedinHomePage.getCurrentUrl(), "https://www.linkedin.com/feed/", "Home page URL is wrong");
-        Assert.assertTrue(linkedinHomePage.isNewPostLinkDisplayed(), "Home page New post link is not displayed");
+        Assert.assertTrue(linkedinHomePage.isHomePageLoaded(), "Home page New post link is not displayed");
     }
 
-    @Test
-    public void testNegativeLoginEmptyEmail() throws InterruptedException {
+    @DataProvider
+    public Object[][] partialDataProvider() {
+        return new Object[][]{
+                { "o.a.krasnitskaya@mail.ru", "" },
+                { "", "10091971q" },
+                { "", "" },
+        };
+    }
+
+    @Test (dataProvider = "partialDataProvider")
+    public void failedLoginEmptyFieldsTest(String email, String password) throws InterruptedException {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
+        Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
 
-        linkedinLoginPage.login("", "10091971q");
+        linkedinLoginPage.login(email, password);
 
         sleep(3000);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
+        Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
     }
 
-    @Test
-    public void testNegativeLoginEmptyPassword() throws InterruptedException {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
-        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
-
-        linkedinLoginPage.login("o.a.krasnitskaya@mail.ru", "");
-
-        sleep(3000);
-        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
+    @DataProvider
+    public Object[][] invalidDataProvider() {
+        return new Object[][]{
+                { "o.a.krasnitskaya@mail.ru", "1" },
+                { "@mail.ru", "10091971q" },
+                { "o.a.krasnitskayamail.ru", "10091971q" },
+                { "o.a.krasnitskayamail.ru", "10091971Q" },
+        };
     }
 
-    @Test
-    public void negativeReturnedToLoginSubmitPageTest() throws InterruptedException {
+    @Test (dataProvider = "invalidDataProvider")
+    public void failedLoginInvalidCredentialsTest(String email, String password) throws InterruptedException {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
+        Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
 
-        linkedinLoginPage.login("@mail.ru", "10091971q");
+        linkedinLoginPage.login(email, password);
 
         sleep (3000);
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
@@ -82,23 +88,7 @@ public class LinkedinLoginTest {
                 "Wrong error message text displayed.");
     }
 
-    @Test
-    public void testNegativeLoginWrongPassword() throws InterruptedException {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
-        Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isSignInButtonDisplayed(), "Sign in button is not displayed");
-
-        linkedinLoginPage.login("o.a.krasnitskaya@mail.ru", "1");
-        sleep (3000);
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
-
-        Assert.assertEquals(linkedinLoginSubmitPage.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit", "Login-Submit page url is wrong");
-        Assert.assertEquals(linkedinLoginSubmitPage.getErrorMessageText(),
-                "При заполнении формы были допущены ошибки. Проверьте и исправьте отмеченные поля.",
-                "Wrong error message text displayed.");
-    }
-
-    @AfterMethod
+        @AfterMethod
     public void after() {
 
         webDriver.close();

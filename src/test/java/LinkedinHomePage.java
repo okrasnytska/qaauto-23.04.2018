@@ -16,7 +16,7 @@ public class LinkedinHomePage extends LinkedinBasePage {
         newPostLink = webDriver.findElement(By.xpath("//a[@href='https://www.linkedin.com/post/new']"));
     }
 
-    public boolean isNewPostLinkDisplayed() {
+    public boolean isHomePageLoaded() {
         return newPostLink.isDisplayed();
     }
 }

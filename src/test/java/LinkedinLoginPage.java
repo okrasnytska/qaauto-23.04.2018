@@ -24,7 +24,7 @@ public class LinkedinLoginPage extends LinkedinBasePage {
         passwordField.sendKeys(password);
         signInButton.click();
     }
-    public boolean isSignInButtonDisplayed(){
+    public boolean isLoginPageLoaded(){
         return signInButton.isDisplayed();
     }
 }
