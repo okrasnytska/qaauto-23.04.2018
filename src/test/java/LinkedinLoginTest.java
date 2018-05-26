@@ -19,8 +19,8 @@ public class LinkedinLoginTest {
     @DataProvider
     public Object[][] successfulLoginValidDataProvider() {
         return new Object[][]{
-               { "o.a.krasnitskaya@mail.ru", "10091971q" },
-               //{ "O.A.KRASNITSKAYA@MAIL.RU", "10091971q" },
+               { "ksu.krasik@gmail.com", "10091971q" },
+               //{ "KSU.KRASIK@GMAIL.COM", "10091971q" },
         };
     }
 
@@ -30,7 +30,7 @@ public class LinkedinLoginTest {
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
         Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
 
-        LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(email, password);
+        LinkedinHomePage linkedinHomePage = linkedinLoginPage.validDataLogin(email, password);
 
         Assert.assertEquals(linkedinHomePage.getCurrentUrl(), "https://www.linkedin.com/feed/", "Home page URL is wrong");
         Assert.assertTrue(linkedinHomePage.isHomePageLoaded(), "Home page New post link is not displayed");
@@ -39,9 +39,9 @@ public class LinkedinLoginTest {
     @DataProvider
     public Object[][] failedLoginPartialDataProvider() {
         return new Object[][]{
-                { "o.a.krasnitskaya@mail.ru", "" },
-                { "", "10091971q" },
-                { "", "" },
+                { "ksu.krasik@gmail.com", "" },
+               // { "", "10091971q" },
+             //   { "", "" },
         };
     }
 
@@ -51,7 +51,7 @@ public class LinkedinLoginTest {
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
         Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
 
-        linkedinLoginPage.login(email, password);
+        linkedinLoginPage.partialDataLogin(email, password);
 
         sleep(3000);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
@@ -61,10 +61,10 @@ public class LinkedinLoginTest {
     @DataProvider
     public Object[][] failedLoginInvalidDataProvider() {
         return new Object[][]{
-                { "o.a.krasnitskaya@mail.ru", "@" },
-                { "@mail.ru", "10091971q" },
-                { "o.a.krasnitskayamail.ru", "10091971q" },
-                { "o.a.krasnitskaya@mail.ru", "10091971Q" },
+                { "ksu.krasik@gmail.com", "@" },
+                //{ "@mail.ru", "10091971q" },
+                //{ "ksu.krasik@gmailcom", "10091971q" },
+               // { "ksu.krasik@gmail.com", "10091971Q" },
         };
     }
 
@@ -74,10 +74,9 @@ public class LinkedinLoginTest {
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
         Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
 
-        linkedinLoginPage.login(email, password);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.invalidDataLogin(email, password);
 
         sleep (3000);
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(webDriver);
 
         Assert.assertEquals(linkedinLoginSubmitPage.getCurrentUrl(), "https://www.linkedin.com/uas/login-submit", "Login-Submit page url is wrong");
         Assert.assertTrue(linkedinLoginSubmitPage.isPageLoaded(), "Login-Submit page is not loaded.");
