@@ -14,7 +14,6 @@ public class LinkedinHomePage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-
     public boolean isHomePageLoaded() {
         return newPostLink.isDisplayed();
     }

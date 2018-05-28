@@ -14,6 +14,9 @@ public class LinkedinLoginPage extends LinkedinBasePage {
     @FindBy(id = "login-submit")
     private WebElement signInButton;
 
+    @FindBy(xpath = "//a[@href='https://www.linkedin.com/uas/request-password-reset?trk=uno-reg-guest-home-forgot-password']")
+    private WebElement forgotPasswordButton;
+
     public LinkedinLoginPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
@@ -40,5 +43,10 @@ public class LinkedinLoginPage extends LinkedinBasePage {
     }
     public boolean isLoginPageLoaded(){
         return signInButton.isDisplayed();
+    }
+
+    public LinkedinRequestPasswordResetPage resetPassword() {
+        forgotPasswordButton.click();
+        return PageFactory.initElements(webDriver, LinkedinRequestPasswordResetPage.class);
     }
 }
