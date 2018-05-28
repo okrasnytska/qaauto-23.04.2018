@@ -29,13 +29,13 @@ public class LinkedinResetPasswordTest {
     public void successfulResetPasswordValidDataTest(String email, String gmailEmail, String gmailPassword, String newPassword, String confirmNewPassword) throws InterruptedException {
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
-        Assert.assertTrue(linkedinLoginPage.isLoginPageLoaded(), "Sign in button is not displayed");
+        Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Sign in button is not displayed");
 
         LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage = linkedinLoginPage.resetPassword();
-        Assert.assertTrue(linkedinRequestPasswordResetPage.isLinkedinRequestPasswordResetPageLoaded(), "Submit reset password button is not displayed.");
+        Assert.assertTrue(linkedinRequestPasswordResetPage.isPageLoaded(), "Submit reset password button is not displayed.");
 
         LinkedinRequestPasswordResetSubmitPage linkedinRequestPasswordResetSubmitPage = linkedinRequestPasswordResetPage.successfulResetPasswordSubmit(email);
-        Assert.assertTrue(linkedinRequestPasswordResetSubmitPage.isLinkedinRequestPasswordResetSubmitPageLoaded(), "Resend mail button is not displayed");
+        Assert.assertTrue(linkedinRequestPasswordResetSubmitPage.isPageLoaded(), "Resend mail button is not displayed");
 
         GmailLoginPage gmailLoginPage = linkedinRequestPasswordResetSubmitPage.goToGmail(webDriver);
         sleep(3000);
@@ -48,13 +48,13 @@ public class LinkedinResetPasswordTest {
         Assert.assertTrue(gmailPasswordResetMailPage.isEmailPasswordResetLinkDisplayed(), "Reset password link in email is not displayed.");
 
         LinkedinInsertNewPasswordPage linkedinInsertNewPasswordPage = gmailPasswordResetMailPage.openLinkedinInsertNewPasswordPage();
-        Assert.assertTrue(linkedinInsertNewPasswordPage.isLinkedinInsertNewPasswordPageLoaded(), "Reset password submit button is not displayed.");
+        Assert.assertTrue(linkedinInsertNewPasswordPage.isPageLoaded(), "Reset password submit button is not displayed.");
 
         LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage = linkedinInsertNewPasswordPage.submitNewPassword(newPassword, confirmNewPassword);
-        Assert.assertTrue(linkedinPasswordResetSubmitPage.isLinkedinPasswordResetSubmitPageDisplayed(), "End password submit button is not displayed.");
+        Assert.assertTrue(linkedinPasswordResetSubmitPage.isPageLoaded(), "End password submit button is not displayed.");
 
         LinkedinHomePage linkedinHomePage = linkedinPasswordResetSubmitPage.endPasswordResetGoToHomePage();
-        Assert.assertTrue(linkedinHomePage.isHomePageLoaded(), "New post button is not displayed.");
+        Assert.assertTrue(linkedinHomePage.isPageLoaded(), "New post button is not displayed.");
     }
 
     @DataProvider

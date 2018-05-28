@@ -12,7 +12,7 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public boolean isLinkedinRequestPasswordResetSubmitPageLoaded() {
+    public boolean isPageLoaded() {
         return resendMailButton.isDisplayed();
     }
 

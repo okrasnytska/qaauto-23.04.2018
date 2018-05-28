@@ -28,7 +28,7 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
         return PageFactory.initElements(webDriver, LinkedinRequestPasswordResetSubmitPage.class);
     }
 
-    public boolean isLinkedinRequestPasswordResetPageLoaded() {
+    public boolean isPageLoaded() {
         return resetPasswordSubmitButton.isDisplayed();
     }
 }

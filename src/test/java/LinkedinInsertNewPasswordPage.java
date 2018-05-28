@@ -27,7 +27,7 @@ public class LinkedinInsertNewPasswordPage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public boolean isLinkedinInsertNewPasswordPageLoaded() {
+    public boolean isPageLoaded() {
         return resetPasswordSubmitButton.isDisplayed();
     }
 

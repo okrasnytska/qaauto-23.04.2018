@@ -22,27 +22,24 @@ public class LinkedinLoginPage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-
-    public LinkedinHomePage validDataLogin(String email, String password) {
-        emailField.sendKeys(email);
-        passwordField.sendKeys(password);
-        signInButton.click();
-        return PageFactory.initElements(webDriver, LinkedinHomePage.class);
-    }
-    public LinkedinLoginPage partialDataLogin(String email, String password) {
-        emailField.sendKeys(email);
-        passwordField.sendKeys(password);
-        signInButton.click();
-        return PageFactory.initElements(webDriver, LinkedinLoginPage.class);
-    }
-    public LinkedinLoginSubmitPage invalidDataLogin(String email, String password) {
-        emailField.sendKeys(email);
-        passwordField.sendKeys(password);
-        signInButton.click();
-        return PageFactory.initElements(webDriver, LinkedinLoginSubmitPage.class);
-    }
-    public boolean isLoginPageLoaded(){
+    boolean isPageLoaded() {
         return signInButton.isDisplayed();
+    }
+
+
+    public <T> T login(String email, String password) {
+        emailField.sendKeys(email);
+        passwordField.sendKeys(password);
+        signInButton.click();
+        if (getCurrentUrl().contains("/feed")) {
+            return (T) new LinkedinHomePage(webDriver);
+        }
+        else if (getCurrentUrl().contains("/login-submit")) {
+            return (T) new LinkedinLoginSubmitPage(webDriver);
+        }
+        else {
+            return (T) this;
+        }
     }
 
     public LinkedinRequestPasswordResetPage resetPassword() {
