@@ -1,7 +1,10 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import page.LinkedinBasePage;
 
 
 public class LinkedinHomePage extends LinkedinBasePage {
@@ -14,7 +17,7 @@ public class LinkedinHomePage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    boolean isPageLoaded() {
+    public boolean isPageLoaded() {
         return newPostLink.isDisplayed();
     }
 

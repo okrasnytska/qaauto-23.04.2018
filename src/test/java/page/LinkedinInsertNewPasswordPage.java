@@ -1,7 +1,10 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import page.LinkedinBasePage;
 
 import static java.lang.Thread.sleep;
 
@@ -31,11 +34,11 @@ public class LinkedinInsertNewPasswordPage extends LinkedinBasePage {
         return resetPasswordSubmitButton.isDisplayed();
     }
 
-    public LinkedinPasswordResetSubmitPage submitNewPassword(String newPassword, String confirmNewPassword) throws InterruptedException {
+    public LinkedinPasswordResetSubmitPage submitNewPassword(String newPassword) throws InterruptedException {
         newPasswordField.sendKeys(newPassword);
-        confirmNewPasswordField.sendKeys(confirmNewPassword);
+        confirmNewPasswordField.sendKeys(newPassword);
         resetPasswordSubmitButton.click();
         sleep(3000);
-        return PageFactory.initElements(webDriver, LinkedinPasswordResetSubmitPage.class);
+        return new LinkedinPasswordResetSubmitPage(webDriver);
     }
 }

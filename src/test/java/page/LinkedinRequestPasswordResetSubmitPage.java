@@ -1,7 +1,11 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import page.GmailLoginPage;
+import page.LinkedinBasePage;
 
 public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
 
@@ -18,6 +22,6 @@ public class LinkedinRequestPasswordResetSubmitPage extends LinkedinBasePage {
 
     public GmailLoginPage goToGmail(WebDriver webDriver) {
         webDriver.get("https://mail.google.com/mail/u/1/#inbox");
-        return PageFactory.initElements(webDriver, GmailLoginPage.class);
+        return new GmailLoginPage(webDriver);
     }
 }

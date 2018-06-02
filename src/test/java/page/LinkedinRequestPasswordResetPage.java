@@ -1,7 +1,10 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import page.LinkedinBasePage;
 
 public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 
@@ -22,10 +25,10 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public LinkedinRequestPasswordResetSubmitPage successfulResetPasswordSubmit(String email) {
+    public LinkedinRequestPasswordResetSubmitPage submitUserEmail(String email) {
         emailField.sendKeys(email);
         resetPasswordSubmitButton.click();
-        return PageFactory.initElements(webDriver, LinkedinRequestPasswordResetSubmitPage.class);
+        return new LinkedinRequestPasswordResetSubmitPage(webDriver);
     }
 
     public boolean isPageLoaded() {

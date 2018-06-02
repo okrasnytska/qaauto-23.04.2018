@@ -1,7 +1,12 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import page.GmailInboxPage;
 
 import static java.lang.Thread.sleep;
 
@@ -29,13 +34,19 @@ public class GmailLoginPage {
         return gmailEmailField.isDisplayed();
     }
 
+    public WebElement waitUntilElementIsClickable (WebElement webElement, int timeOutInSeconds){
+        WebDriverWait wait = new WebDriverWait(webDriver, timeOutInSeconds);
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        return webElement;
+    }
+
     public GmailInboxPage gmailLogin(String gmailEmail, String gmailPassword) throws InterruptedException {
         gmailEmailField.sendKeys(gmailEmail);
         gmailSubmitEmailButton.click();
-        sleep(3000);
+        waitUntilElementIsClickable(gmailPasswordField, 10);
         gmailPasswordField.sendKeys(gmailPassword);
         gmailSubmitPasswordButton.click();
-        sleep(3000);
-        return PageFactory.initElements(webDriver, GmailInboxPage.class);
+
+        return new GmailInboxPage(webDriver);
     }
 }

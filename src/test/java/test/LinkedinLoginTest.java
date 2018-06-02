@@ -1,19 +1,13 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+package test;
+
 import org.testng.Assert;
 import org.testng.annotations.*;
+import page.LinkedinHomePage;
+import page.LinkedinLoginPage;
+import page.LinkedinLoginSubmitPage;
 
 
-
-public class LinkedinLoginTest {
-    WebDriver webDriver;
-
-    @BeforeMethod
-    public void before() {
-        webDriver = new FirefoxDriver();
-        //webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        webDriver.get("https://www.linkedin.com");
-    }
+public class LinkedinLoginTest extends LinkedinBaseTest {
 
     @DataProvider
     public Object[][] successfulLoginValidDataProvider() {
@@ -25,7 +19,6 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "successfulLoginValidDataProvider")
     public void successfulLoginValidDataTest(String email, String password) {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Sign in button is not displayed");
 
@@ -46,7 +39,6 @@ public class LinkedinLoginTest {
 
     @Test (dataProvider = "failedLoginPartialDataProvider")
     public void failedLoginPartialDataTest(String email, String password) {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Sign in button is not displayed");
 
@@ -68,7 +60,6 @@ public class LinkedinLoginTest {
 
     @Test (dataProvider = "failedLoginInvalidDataProvider")
     public void failedLoginInvalidDataTest(String email, String password) {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(webDriver);
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
         Assert.assertTrue(linkedinLoginPage.isPageLoaded(), "Sign in button is not displayed");
 
@@ -81,9 +72,5 @@ public class LinkedinLoginTest {
                 "Wrong error message text displayed.");
     }
 
-        @AfterMethod
-    public void after() {
 
-        webDriver.close();
-    }
 }

@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,6 +28,6 @@ public class GmailInboxPage extends GmailLoginPage {
 
     public GmailPasswordResetMailPage openLinkedinMail() {
         lastEmailLinkedin.click();
-        return PageFactory.initElements(webDriver, GmailPasswordResetMailPage.class);
+        return new GmailPasswordResetMailPage(webDriver);
     }
 }
