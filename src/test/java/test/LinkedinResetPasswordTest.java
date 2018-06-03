@@ -5,8 +5,6 @@ import org.testng.annotations.*;
 import page.*;
 
 
-import static java.lang.Thread.sleep;
-
 public class LinkedinResetPasswordTest extends LinkedinBaseTest {
 
 
@@ -22,8 +20,6 @@ public class LinkedinResetPasswordTest extends LinkedinBaseTest {
 
         LinkedinRequestPasswordResetSubmitPage linkedinRequestPasswordResetSubmitPage = linkedinRequestPasswordResetPage.submitUserEmail(userEmail);
         Assert.assertTrue(linkedinRequestPasswordResetSubmitPage.isPageLoaded(), "Resend mail button is not displayed");
-
-
 
         /*GmailLoginPage gmailLoginPage = linkedinRequestPasswordResetSubmitPage.goToGmail(webDriver);
 

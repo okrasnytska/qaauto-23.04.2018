@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
         		String messageTo = "ksu.krasik@gmail.com";
         		String messageFrom = "ksu.krasik@gmail.com";
 
-                		GMailService gMailService = new GMailService();
+        		GMailService gMailService = new GMailService();
         		gMailService.connect();
         		String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         		System.out.println("Content: " + message);
