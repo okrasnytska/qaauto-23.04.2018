@@ -38,7 +38,6 @@ public class LinkedinInsertNewPasswordPage extends LinkedinBasePage {
         newPasswordField.sendKeys(newPassword);
         confirmNewPasswordField.sendKeys(newPassword);
         resetPasswordSubmitButton.click();
-        sleep(3000);
         return new LinkedinPasswordResetSubmitPage(webDriver);
     }
 }

@@ -13,6 +13,7 @@ public class LinkedinPasswordResetSubmitPage extends LinkedinBasePage {
 
     public LinkedinPasswordResetSubmitPage(WebDriver webDriver) {
         super(webDriver);
+        waitUntilElementIsClickable(endPasswordResetButton, 10);
         PageFactory.initElements(webDriver, this);
     }
 
