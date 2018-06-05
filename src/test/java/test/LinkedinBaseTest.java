@@ -1,6 +1,8 @@
 package test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +16,8 @@ public class LinkedinBaseTest {
 
     @BeforeMethod
     public void before() {
-        webDriver = new FirefoxDriver();
+        WebDriverManager.chromedriver().setup();
+        webDriver = new ChromeDriver();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.get("https://www.linkedin.com");
         linkedinLoginPage = new LinkedinLoginPage(webDriver);
