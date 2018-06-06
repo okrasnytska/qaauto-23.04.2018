@@ -4,12 +4,19 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import page.*;
 
-
+/**
+ * Password reset Test Object class
+ */
 public class LinkedinResetPasswordTest extends LinkedinBaseTest {
 
 
+    /**
+     * Method for successful password reset test
+     * Can be realized using GmailService class or Gmail pages objects
+     * Strings userEmail and newUserPassword can be parametrized for other account
+     */
     @Test
-    public void successfulResetPasswordValidDataTest() throws InterruptedException {
+    public void successfulResetPasswordValidDataTest() {
         String userEmail = "ksu.krasik@gmail.com";
         String newUserPassword = "10091971q";
 
@@ -39,30 +46,6 @@ public class LinkedinResetPasswordTest extends LinkedinBaseTest {
 
         LinkedinHomePage linkedinHomePage = linkedinPasswordResetSubmitPage.endPasswordResetGoToHomePage();
         Assert.assertTrue(linkedinHomePage.isPageLoaded(), "New post button is not displayed.");
-    }
-
-    @DataProvider
-    public Object[][] invalidEmailDataProvider() {
-        return new Object[][] {
-                {},
-                {}
-        };
-    }
-    @Test
-    public void failedResetPasswordInvalidEmailTest() {
-
-    }
-
-    @DataProvider
-    public Object[][] invalidPasswordDataProvider() {
-        return new Object[][] {
-                {},
-                {}
-        };
-    }
-    @Test
-    public void failedResetPasswordInvalidPasswordTest() {
-
     }
 
 }

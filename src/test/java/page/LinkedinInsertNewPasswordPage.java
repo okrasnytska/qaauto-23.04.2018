@@ -6,8 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import page.LinkedinBasePage;
 
-import static java.lang.Thread.sleep;
-
+/**
+ * Insert new password Page Object class
+ */
 public class LinkedinInsertNewPasswordPage extends LinkedinBasePage {
 
     @FindBy(id = "newPassword")
@@ -25,16 +26,30 @@ public class LinkedinInsertNewPasswordPage extends LinkedinBasePage {
     @FindBy(id = "confirm-password-error")
     private WebElement confirmNewPasswordErrorMessage;
 
+    /**
+     * Constructor of Insert new password page
+     * @param webDriver - current browser instance
+     * Page factory method initializes current class elements
+     */
     public LinkedinInsertNewPasswordPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Method to check the loading of Insert new password page element
+     * @return - true if element is displayed, false if it is not displayed
+     */
     public boolean isPageLoaded() {
         return resetPasswordSubmitButton.isDisplayed();
     }
 
-    public LinkedinPasswordResetSubmitPage submitNewPassword(String newPassword) throws InterruptedException {
+    /**
+     * Method for submitting of new user password
+     * @param newPassword - new user password and password confirmation
+     * @return - new object of Password reset Submit page class
+     */
+    public LinkedinPasswordResetSubmitPage submitNewPassword(String newPassword) {
         newPasswordField.sendKeys(newPassword);
         confirmNewPasswordField.sendKeys(newPassword);
         resetPasswordSubmitButton.click();

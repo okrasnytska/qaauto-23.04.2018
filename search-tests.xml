@@ -2,7 +2,17 @@
 
 <suite name="Linkedin">
 
-    <test name="Search Tests">
+    <test name="Search Tests Chrome">
+        <parameter name="browserType" value="Chrome"/>
+        <parameter name="envURL" value="https://www.linkedin.com/" />
+        <classes>
+            <class name="test.LinkedinSearchTest" />
+        </classes>
+    </test>
+
+    <test name="Search Tests Firefox">
+        <parameter name="browserType" value="Firefox"/>
+        <parameter name="envURL" value="https://www.linkedin.com/" />
         <classes>
             <class name="test.LinkedinSearchTest" />
         </classes>

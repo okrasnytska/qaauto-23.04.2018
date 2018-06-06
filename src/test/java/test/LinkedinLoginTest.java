@@ -7,6 +7,9 @@ import page.LinkedinLoginPage;
 import page.LinkedinLoginSubmitPage;
 
 
+/**
+ * Login Test Object class
+ */
 public class LinkedinLoginTest extends LinkedinBaseTest {
 
     @DataProvider
@@ -17,6 +20,11 @@ public class LinkedinLoginTest extends LinkedinBaseTest {
         };
     }
 
+    /**
+     * Method for successful Linkedin login test
+     * @param email - user email should be placed in Data Provider
+     * @param password - user password should be placed in Data Provider
+     */
     @Test(dataProvider = "successfulLoginValidDataProvider")
     public void successfulLoginValidDataTest(String email, String password) {
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
@@ -37,6 +45,11 @@ public class LinkedinLoginTest extends LinkedinBaseTest {
         };
     }
 
+    /**
+     * Method for failed Linkedin login test with partial data
+     * @param email - user email should be placed in Data Provider
+     * @param password - user password should be placed in Data Provider
+     */
     @Test (dataProvider = "failedLoginPartialDataProvider")
     public void failedLoginPartialDataTest(String email, String password) {
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");
@@ -58,6 +71,11 @@ public class LinkedinLoginTest extends LinkedinBaseTest {
         };
     }
 
+    /**
+     * Method for failed Linkedin login test with invalid data
+     * @param email - user email should be placed in Data Provider
+     * @param password - user password should be placed in Data Provider
+     */
     @Test (dataProvider = "failedLoginInvalidDataProvider")
     public void failedLoginInvalidDataTest(String email, String password) {
         Assert.assertEquals(linkedinLoginPage.getCurrentTitle(), "LinkedIn: Войти или зарегистрироваться", "Login page title is wrong");

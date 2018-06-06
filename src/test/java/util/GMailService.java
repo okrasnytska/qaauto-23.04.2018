@@ -8,6 +8,9 @@ import java.io.IOException;import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Gmail Service Object class
+ */
         public class GMailService {
 	String host = "imap.gmail.com";
 	String user;
@@ -20,10 +23,10 @@ import java.util.concurrent.Executors;
         	private Folder inboxFolder;
 			private IdleManager idleManager;
 
-        	/*
- 	  Example of util.GMailService usage
- 	  @param args - dummy args for main()
- 	 */
+        	/**
+              * Example of util.GMailService usage
+              * @param args - dummy args for main()
+             */
         	public static void main(String[] args) {
         		String messageSubject = "1";
         		String messageTo = "ksu.krasik@gmail.com";
@@ -35,24 +38,27 @@ import java.util.concurrent.Executors;
         		System.out.println("Content: " + message);
         	}
 
-        	/*
- 	 * Default util.GMailService constructor with predefined user/pass credentials
- 	 */
+        	/**
+             * Default util.GMailService constructor with predefined user/pass credentials
+             */
         	public GMailService(){
         		this.user = "ksu.krasik@gmail.com";
         		this.pass = "04121978Ljrex";
         	}
 
-        	/*
+        	/**
  	 * Custom util.GMailService constructor that allows to set user/pass credentials
  	 * @param user - gMail acc username
  	 * @param pass - gMail acc pass
  	 */
-        	/*public util.GMailService(String user, String pass){
+        	    public GMailService(String user, String pass){
         		this.user = user;
         		this.pass = pass;
-        	} */
+        	}
 
+    /**
+     * Method for connection establishment to Gmail service
+     */
         	public synchronized void connect() {
         		Properties properties = new Properties();
         		properties.put("mail.imap.usesocketchannels", "true");
@@ -79,6 +85,14 @@ import java.util.concurrent.Executors;
             					}
             }
 
+    /**
+     * Method to get text of email in html format
+     * @param messageSubject - a subject of message that is expected to receive
+     * @param messageTo - a recepient of message that is expected to receive
+     * @param messageFrom - a sender of message that is expected to receive
+     * @param timeoutInSec - time period to wait for a message
+     * @return - text of message in html format if message is received or a StackTrace of exception
+     */
         	public String waitMessage(String messageSubject, String messageTo, String messageFrom,
 			long timeoutInSec){
         		try {
@@ -133,9 +147,10 @@ import java.util.concurrent.Executors;
 
         	private boolean textIsHtml = false;
 
-        	/*
- 	 * Return the primary text content of the message.
- 	 */
+
+        	/**
+ 	        * Return the primary text content of the message.
+ 	        */
         	private String getText(Part p) throws
 			MessagingException, IOException {
         		if (p.isMimeType("text/*")) {

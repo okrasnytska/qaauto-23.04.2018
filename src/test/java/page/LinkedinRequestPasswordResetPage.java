@@ -7,6 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 import page.LinkedinBasePage;
 import util.GMailService;
 
+/**
+ * Request password reset Page Object class
+ */
 public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 
     @FindBy(id = "username")
@@ -23,11 +26,21 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
 
     public static String gmailMessage;
 
+    /**
+     * Constructor of Request password reset Page
+     * @param webDriver - current browser instance
+     * Page factory method initializes current class elements
+     */
     public LinkedinRequestPasswordResetPage(WebDriver webDriver) {
         super(webDriver);
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Method to submit user email and get Linkedin message from gmail via GmailService methods
+     * @param email - user email
+     * @return - new object of Request password reset submit page class
+     */
     public LinkedinRequestPasswordResetSubmitPage submitUserEmail(String email) {
         GMailService gMailService = new GMailService();
         gMailService.connect();
@@ -37,6 +50,10 @@ public class LinkedinRequestPasswordResetPage extends LinkedinBasePage {
         return new LinkedinRequestPasswordResetSubmitPage(webDriver);
     }
 
+    /**
+     * Method to check the loading of Request password reset Page element
+     * @return - true if element is displayed, false if it is not displayed
+     */
     public boolean isPageLoaded() {
         return resetPasswordSubmitButton.isDisplayed();
     }
