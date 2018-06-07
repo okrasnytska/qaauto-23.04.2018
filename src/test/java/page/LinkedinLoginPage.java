@@ -48,7 +48,7 @@ public class LinkedinLoginPage extends LinkedinBasePage {
      * @param email - user email (valid or invalid)
      * @param password - user password (valid or invalid)
      * @param <T> - type of Page object that will be returned
-     * @return - page object depending on user email and password inserted (valid or invalid)
+     * @return - page object class depending on user email and password inserted (valid or invalid)
      */
     public <T> T login(String email, String password) {
         emailField.sendKeys(email);
